@@ -375,13 +375,14 @@ def _generate_out_list(results):
                 if val['status'].startswith('Skip'):
                     skipped = skipped + 1
                 total_time = total_time + float(val['duration'])
+    coverage = (100-round((missing_tests*100/(passed+failed+skipped+missing_tests))))
     out_list = []
     for key, value in results.items():
         out_list.append({key: value})
     out_list.sort()
     out_list.append({'TEST RESULTS': {'Execution Time': round(total_time, 4),
                                       'Passed': passed, 'Failed': failed, 'Skipped': skipped,
-                                      'Missing Tests': missing_tests}})
+                                      'Missing Tests': missing_tests, 'Test Coverage': coverage}})
     return out_list
 
 
